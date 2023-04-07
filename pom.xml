@@ -17,6 +17,7 @@
     <modules>
         <module>api-passenger</module>
         <module>service-verificationcode</module>
+        <module>internal-common</module>
     </modules>
 
     <properties>

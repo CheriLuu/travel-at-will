@@ -21,7 +21,7 @@ public class VerificationCodeService {
 
         //返回验证码
         JSONObject result = new JSONObject();
-        result.put("code", 200);
+        result.put("code", 1);
         result.put("message", "success");
         return result.toString();
     }
