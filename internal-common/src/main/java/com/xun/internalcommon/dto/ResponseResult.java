@@ -17,6 +17,17 @@ public class ResponseResult<T> {
     private int code;
     private String message;
     private T data;
+
+    /**
+    * @author Shilx
+    * @description 成功，无参
+    * @date 2023/4/8 23:32
+    * @Param
+    * @return ResponseResult
+    */
+    public static <T> ResponseResult success() {
+        return new ResponseResult().setCode(CommonStatusEnum.SUCCESS.getCode()).setMessage(CommonStatusEnum.SUCCESS.getValue());
+    }
     /**
      * @MethodName 成功
      * @author slx
