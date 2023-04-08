@@ -24,7 +24,7 @@ public class ResponseResult<T> {
      * @param data
      * @return T
      */
-    public static ResponseResult<T> success(T data){
+    public static <T> ResponseResult success(T data){
         return new ResponseResult().setCode(CommonStatusEnum.SUCCESS.getCode())
                 .setMessage(CommonStatusEnum.SUCCESS.getValue())
                 .setData(data);
@@ -37,7 +37,7 @@ public class ResponseResult<T> {
      * @param data
      * @return ResponseResult
      */
-    public ResponseResult<T> fail(T data) {
+    public static <T> ResponseResult fail(T data) {
         return new ResponseResult().setData(data);
     }
 
@@ -48,7 +48,7 @@ public class ResponseResult<T> {
      * @author slx
      * @date 2023年04月07日
      */
-    public ResponseResult<T> fail(int code, String message) {
+    public static <T> ResponseResult fail(int code, String message) {
         return new ResponseResult().setCode(code).setMessage(message);
     }
 
@@ -59,7 +59,7 @@ public class ResponseResult<T> {
      * @author slx
      * @date 2023年04月07日
      */
-    public ResponseResult<T> fail(int code, String message, String data) {
+    public static <T> ResponseResult fail(int code, String message, String data) {
         return new ResponseResult().setCode(code).setMessage(message).setData(data);
     }
 }

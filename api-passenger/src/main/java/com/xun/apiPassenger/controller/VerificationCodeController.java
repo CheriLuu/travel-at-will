@@ -19,7 +19,7 @@ public class VerificationCodeController {
     @Autowired
     private VerificationCodeService verificationCodeService;
 
-    @GetMapping("/verification-Code")
+    @GetMapping("/verification-code")
     public String verificationCode(@RequestBody VerificationCodeDTO verificationCodeDTO){
         String passengerPhone = verificationCodeDTO.getPassengerPhone();
         System.out.println("接收到的手机号为："+passengerPhone);

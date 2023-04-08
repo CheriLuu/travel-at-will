@@ -1,6 +1,10 @@
 package com.xun.apiPassenger.service;
 
+import com.xun.apiPassenger.remote.ServiceVerificationcodeClient;
+import com.xun.internalcommon.dto.ResponseResult;
+import com.xun.internalcommon.response.NumberCodeResponse;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +16,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class VerificationCodeService {
+    @Autowired
+    private ServiceVerificationcodeClient serviceVerificationcodeClient;
     public String generatorCode(String passengerPhone){
         //获取验证码
-        System.out.println("获取验证码");
+        ResponseResult<NumberCodeResponse> numberCodeResponse = serviceVerificationcodeClient.getNumberCode(6);
+        int numberCode = numberCodeResponse.getData().getNumberCode();
+        System.out.println("获取到的验证码为："+numberCode);
 
         //存入redis
         System.out.println("存入Redis");
