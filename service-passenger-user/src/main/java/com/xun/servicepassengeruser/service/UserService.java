@@ -20,6 +20,13 @@ import java.util.Map;
 public class UserService {
     @Autowired
     private PassengerUserMapper passengerUserMapper;
+    /**
+    * @author Shilx
+    * @description 查询与注册
+    * @date 2023/4/9 19:45
+    * @Param passengerPhone
+    * @return passengerUserMapper
+    */
     public ResponseResult logOrReg(String passengerPhone) {
         System.out.println("服务被调用，手机号："+passengerPhone);
         //根据手机号查询用户信息
