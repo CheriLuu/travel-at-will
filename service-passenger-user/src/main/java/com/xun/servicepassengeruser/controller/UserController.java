@@ -21,6 +21,6 @@ public class UserController {
     public ResponseResult logOrRegistry(@RequestBody VerificationCodeDTO verificationCodeDTO) {
         String passengerPhone = verificationCodeDTO.getPassengerPhone();
         System.out.println("passengerPhone:"+passengerPhone);
-        return ResponseResult.success();
+        return userService.logOrReg(passengerPhone);
     }
 }
