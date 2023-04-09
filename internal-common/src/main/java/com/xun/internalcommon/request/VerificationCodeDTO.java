@@ -1,4 +1,4 @@
-package com.xun.apiPassenger.request;
+package com.xun.internalcommon.request;
 
 import lombok.Data;
 
