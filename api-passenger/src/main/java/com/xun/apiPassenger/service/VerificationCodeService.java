@@ -1,10 +1,11 @@
 package com.xun.apiPassenger.service;
 
 import com.xun.apiPassenger.remote.ServiceVerificationcodeClient;
+import com.xun.internalcommon.constant.CommonStatusEnum;
 import com.xun.internalcommon.dto.ResponseResult;
 import com.xun.internalcommon.dto.TokenResponse;
 import com.xun.internalcommon.response.NumberCodeResponse;
-import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,14 @@ public class VerificationCodeService {
         //根据key获取value
         String redisValue = stringRedisTemplate.opsForValue().get(key);
         //校验验证码
-        System.out.println("校验验证码");
+        //验证码过期
+        if (StringUtils.isBlank(redisValue)) {
+            return ResponseResult.fail(CommonStatusEnum.VERIFICATION_CODE_EXPIRE.getCode(), CommonStatusEnum.VERIFICATION_CODE_ERROR.getValue());
+        }
+        //验证码不正确
+        if (!redisValue.trim().equals(verificationCode.trim())) {
+            return ResponseResult.fail(CommonStatusEnum.VERIFICATION_CODE_ERROR.getCode(), CommonStatusEnum.VERIFICATION_CODE_ERROR.getValue());
+        }
         //判断用户是否存在
         System.out.println("当前用户存在");
         //颁发令牌
