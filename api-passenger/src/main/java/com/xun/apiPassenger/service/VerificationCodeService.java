@@ -39,12 +39,22 @@ public class VerificationCodeService {
         int numberCode = numberCodeResponse.getData().getNumberCode();
         //存入redis
         //传入key
-        String key = verificationCodePrefix + passengerPhone;
+        String key = generatorKeyByPassengerPhone(passengerPhone);
         //存入redis
         stringRedisTemplate.opsForValue().set(key, String.valueOf(numberCode), 2, TimeUnit.MINUTES);
         //通过短信服务商， 将验证码发送到手机（阿里短信服务、腾讯短信通、华信、容联等，后续开发）
         //也可以返回""值
         return ResponseResult.success();
+    }
+    /**
+    * @author Shilx
+    * @description 生成redis中的key
+    * @date 2023/4/9 17:08
+    * @Param
+    * @return 
+    */
+    private String generatorKeyByPassengerPhone(String passengerPhone){
+        return verificationCodePrefix + passengerPhone;
     }
     /**
     * @author Shilx
@@ -55,7 +65,10 @@ public class VerificationCodeService {
     */
     public ResponseResult checkVerificationCode(String passengerPhone,String verificationCode){
         //读取验证码
-        System.out.println("读取验证码");
+        //生成key
+        String key = generatorKeyByPassengerPhone(passengerPhone);
+        //根据key获取value
+        String redisValue = stringRedisTemplate.opsForValue().get(key);
         //校验验证码
         System.out.println("校验验证码");
         //判断用户是否存在
