@@ -6,6 +6,7 @@ import com.xun.servicepassengeruser.mapper.PassengerUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,18 @@ public class UserService {
             System.out.println("passenger:"+passengerUser);
         });
         //判断用户信息是否存在
-        //不存在，插入
+        if (passengerUsers.size() == 0) {
+            //不存在，插入
+            PassengerUser user = new PassengerUser();
+            user.setPassengerPhone(passengerPhone);
+            user.setPassengerName("张三");
+            user.setPassengerGender((byte) 1);
+            user.setState((byte) 0);
+            LocalDateTime now = LocalDateTime.now();
+            user.setGmtCreate(now);
+            user.setGmtModified(now);
+            passengerUserMapper.insert(user);
+        }
         return ResponseResult.success();
     }
 }
