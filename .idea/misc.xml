@@ -12,6 +12,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/service-verificationcode/pom.xml" />
+        <option value="$PROJECT_DIR$/service-passenger-user/pom.xml" />
       </list>
     </option>
   </component>
