@@ -1,9 +1,11 @@
 package com.xun.apiPassenger.service;
 
+import com.xun.apiPassenger.remote.ServicePassengerUserClient;
 import com.xun.apiPassenger.remote.ServiceVerificationcodeClient;
 import com.xun.internalcommon.constant.CommonStatusEnum;
 import com.xun.internalcommon.dto.ResponseResult;
 import com.xun.internalcommon.dto.TokenResponse;
+import com.xun.internalcommon.request.VerificationCodeDTO;
 import com.xun.internalcommon.response.NumberCodeResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 public class VerificationCodeService {
     @Autowired
     private ServiceVerificationcodeClient serviceVerificationcodeClient;
+    @Autowired
+    private ServicePassengerUserClient servicePassengerUserClient;
     //验证码前缀
     private String verificationCodePrefix = "passenger-verification-code-";
     @Autowired
@@ -80,7 +84,9 @@ public class VerificationCodeService {
             return ResponseResult.fail(CommonStatusEnum.VERIFICATION_CODE_ERROR.getCode(), CommonStatusEnum.VERIFICATION_CODE_ERROR.getValue());
         }
         //判断用户是否存在
-        System.out.println("当前用户存在");
+        VerificationCodeDTO verificationCodeDTO = new VerificationCodeDTO();
+        verificationCodeDTO.setPassengerPhone(passengerPhone);
+        servicePassengerUserClient.logOrReg(verificationCodeDTO);
         //颁发令牌
         System.out.println("颁发令牌");
         //响应token

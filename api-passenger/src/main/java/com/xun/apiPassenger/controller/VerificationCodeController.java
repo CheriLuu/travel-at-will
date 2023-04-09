@@ -1,8 +1,8 @@
 package com.xun.apiPassenger.controller;
 
-import com.xun.apiPassenger.request.VerificationCodeDTO;
 import com.xun.apiPassenger.service.VerificationCodeService;
 import com.xun.internalcommon.dto.ResponseResult;
+import com.xun.internalcommon.request.VerificationCodeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
